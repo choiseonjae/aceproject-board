@@ -1,0 +1,26 @@
+
+	--table 목록들 출
+	show tables;
+
+	-- board table 생성
+	CREATE TABLE board (
+	  user_id VARCHAR(20) NOT NULL,
+	  title VARCHAR(45) NOT NULL,
+	  contents VARCHAR(2000),
+	  date_entered DATETIME DEFAULT CURRENT_TIMESTAMP,
+	  board_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+	  PRIMARY KEY (board_id));
+  
+	-- drop table board;
+
+	-- 게시글 추가
+	insert into board (user_id, title, contents) value ("choiseonjae", "Hello", "I'm seonjae");
+  
+	-- board 테이블 전체 확인 
+	select * from board;
+  
+	-- 컬럼명 바꾸기 
+	ALTER TABLE board CHANGE DateEntered date_entered DATETIME;
+
+	-- 컬럼 목록 보
+	SHOW COLUMNS FROM board; 
