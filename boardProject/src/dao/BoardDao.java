@@ -109,6 +109,7 @@ public class BoardDao extends Dao {
 
 	}
 
+	// 조회수 증
 	public void updateView(int boardId) {
 		try {
 			connect();
@@ -123,5 +124,44 @@ public class BoardDao extends Dao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	// 게시글 삭
+	public void deleteBoard(int boardId) {
+		try {
+			connect();
+
+			String sql = "DELETE FROM board WHERE (board_id = ?);";
+
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setInt(1, boardId);
+			pstmt.executeUpdate();
+
+			disconnect();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	// 게시글 수정
+	public void updateBoard(int boardId, String title, String contents) {
+		try {
+			connect();
+			String sql = "UPDATE board SET title = ?, contents = ? WHERE (board_id = ?);";
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, title);
+			pstmt.setString(2, contents);
+			pstmt.setInt(3, boardId);
+			pstmt.executeUpdate();
+
+			disconnect();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 }

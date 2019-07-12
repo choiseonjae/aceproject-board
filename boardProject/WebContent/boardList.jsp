@@ -17,8 +17,8 @@
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	
-	<!-- 내꺼  -->
+
+<!-- 내꺼  -->
 <link href="./css/BackGround.css" rel="stylesheet" type="text/css">
 
 
@@ -37,7 +37,6 @@
 					<tr>
 						<th>#</th>
 						<th>Title</th>
-						<th>Contents</th>
 						<th>Name</th>
 						<th>Date</th>
 						<th>View</th>
@@ -48,7 +47,6 @@
 						<tr onclick="clickBoard(${board.boardId})">
 							<td>${board.boardId}</td>
 							<td>${board.title}</td>
-							<td>${board.contents}</td>
 							<td>${board.userId}</td>
 							<td>${board.date}</td>
 							<th>${board.view}</th>
@@ -84,14 +82,16 @@
 
 					<li class="page-item"><a href="boardForm.html"
 						class="page-link">글쓰기</a></li>
+					<li class="page-item"><a href="./LoginController"
+						class="page-link">로그아웃</a></li>
 				</ul>
 			</div>
 		</div>
 	</div>
-	
+
 	<script>
 	function clickBoard(boardId) {
-		location.href=".//board.do?boardId=" + boardId;
+		location.href="./board.do?boardId=" + boardId;
 	}
 	</script>
 </body>

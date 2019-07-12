@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -22,28 +24,43 @@
 <body>
 	<div class="container">
 		<div class="table-wrapper">
-			<table>
-				<thead>
-					<tr> 
-						<th>No</th>
-						<td>${board.boardId}</td>
-						<th>Title</th>
-						<td>${board.title}</td>
-					</tr>
-					<tr>
-						<th>Name</th>
-						<td>${board.userId}</td>
-						<th>Date</th>
-						<td>${board.date}</td>
-						<th>View</th>
-						<td>${board.view}</td>
-					</tr>
-				</thead>
-				<tbody>
-					<td>${board.contents}</td>
-				</tbody>
-			</table>
+
+			<li>Title - ${board.title}</li>
+			<li>Name - ${board.userId}</li>
+			<li>Date - ${board.date}</li>
+			<li>View - ${board.view}</li>
+			<p></p>
+			${board.contents}
+			<p></p>
+			<%-- if 문 --%>
+			<c:choose>
+				<%-- 내가 로그인한 id와 게시글을 적은 user id와 같은지 확인 --%>
+				<c:when test="${board.userId == sessionScope.id}">
+					<ul class="pagination justify-content-center">
+						<li class="page-item">
+							<form action="./board" method="post">
+								<input type="submit" value="삭제"> <input type=hidden
+									name="type" value="delete"> <input type=hidden
+									name="boardId" value="${board.boardId}">
+							</form>
+
+						</li>
+					</ul>
+					<ul class="pagination justify-content-center">
+						<li class="page-item">
+							<form action="./board" method="post">
+								<input type="submit" value="수정"> <input type=hidden
+									name="type" value="replace"> <input type=hidden
+									name="boardId" value="${board.boardId}">
+							</form>
+						</li>
+					</ul>
+				</c:when>
+
+			</c:choose>
+
 		</div>
 	</div>
+
 </body>
 </html>

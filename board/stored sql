@@ -24,3 +24,5 @@
 
 	-- 컬럼 목록 보
 	SHOW COLUMNS FROM board; 
+	
+	ALTER TABLE board CHANGE view view INT NOT NULL UNSIGNED DEFAULT 0;

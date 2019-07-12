@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class Dao {
 
@@ -15,25 +16,34 @@ public class Dao {
 	protected String jdbc_url;
 
 	protected Dao(String dbName, String dbId, String dbpw) {
-		try {
+//		try {
 			this.dbId = dbId;
 			this.dbpw = dbpw;
 			jdbc_url = "jdbc:mysql://localhost:3306/" + dbName + "?characterEncoding=utf8&serverTimezone=UTC";
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 	}
 
 	// Database 연결
 	protected void connect() {
 		// 생성자를 만들어준다.
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection(jdbc_url, dbId, dbpw); // DB에 연결
-			System.out.println("연결을 시작합니다...");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+//		try {
+			try {
+				Class.forName("com.mysql.jdbc.Driver");
+				conn = DriverManager.getConnection(jdbc_url, dbId, dbpw); // DB에 연결
+				
+				System.out.println("연결을 시작합니다...");
+			} catch (ClassNotFoundException | SQLException e) {
+				// TODO Auto-generated catch block
+//				e.printStackTrace();
+				throw new RuntimeException(e);
+			}
+			
+			
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 	}
 
 	// Database 연결 해제

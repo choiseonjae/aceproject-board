@@ -1,11 +1,13 @@
-package DAO;
+package dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
-import DTO.BoardBean;
+import dto.BoardBean;
 
 public class BoardDao {
 	private Connection conn = null; // 데이터베이스를 접근하기 위한 객체
@@ -29,7 +31,7 @@ public class BoardDao {
 	private void connect() {
 		// 생성자를 만들어준다.
 		try {
-			// Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(jdbc_url, dbId, dbpw); // DB에 연결
 			System.out.println("연결을 시작합니다...");
 		} catch (Exception e) {
@@ -78,11 +80,47 @@ public class BoardDao {
 		}
 	}
 
+	public List<BoardBean> getPage(int pageNo) {
+		List<BoardBean> boards = new ArrayList<>();
+
+		try {
+			connect();
+
+			int startLimit = (pageNo - 1) * 10;
+			int endLimit = startLimit + 10;
+
+			StringBuffer sql = new StringBuffer("SELECT * FROM board ORDER BY board_id DESC LIMIT ?, ?;");
+			pstmt = conn.prepareStatement(sql.toString());
+			pstmt.setInt(1, startLimit);
+			pstmt.setInt(2, endLimit);
+
+			ResultSet rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				BoardBean board = new BoardBean();
+				board.setUserId(rs.getString("user_id"));
+				board.setTitle(rs.getString("title"));
+				board.setContents(rs.getString("contents"));
+				board.setBoardId(rs.getInt(("board_id")));
+				board.setDate(rs.getDate("date_entered"));
+
+				boards.add(board);
+
+			}
+
+			disconnect();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return boards;
+	}
+
 	// 게시판 찾기
 	public BoardBean getBoard(int boardId) {
 
 		BoardBean board = null;
-		
+
 		try {
 			connect();
 
@@ -105,7 +143,7 @@ public class BoardDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return board;
 
 	}

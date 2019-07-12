@@ -1,6 +1,6 @@
-package DTO;
+package dto;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class BoardBean {
 
@@ -9,6 +9,7 @@ public class BoardBean {
 	private Date date;
 	private String userId;
 	private int boardId;
+	private int view;
 
 	public String getTitle() {
 		return title;
@@ -49,5 +50,14 @@ public class BoardBean {
 	public void setBoardId(int boardId) {
 		this.boardId = boardId;
 	}
+
+	public int getView() {
+		return view;
+	}
+
+	public void setView(int view) {
+		this.view = view;
+	}
+	
 
 }

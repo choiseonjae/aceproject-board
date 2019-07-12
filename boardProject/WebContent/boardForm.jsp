@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -51,19 +54,20 @@
 					<tr>
 						<th>제목:</th>
 						<td><input type="text" placeholder="제목을 입력하세요. " name="title"
-							class="form-control" required /></td>
+							class="form-control" value="${board.title}" required /></td>
 					</tr>
 					<tr>
 						<th>내용:</th>
 						<td><textarea rows=15 cols="10" height="50ps"
 								placeholder="내용을 입력하세요. " name="contents" class="form-control"
-								required></textarea></td>
+								required>${board.contents}</textarea></td>
 					</tr>
 					<tr>
-						<td colspan="2"><input type="submit" value="등록"
+						<td colspan="2"><input type="submit" value="수정"
 							class="pull-right" /></td>
 					</tr>
-					<input type=hidden name="type" value="write">
+					<input type=hidden name="type" value="update"> <input
+						type=hidden name="boardId" value="${board.boardId}">
 				</form>
 			</tbody>
 		</table>

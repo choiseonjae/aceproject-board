@@ -17,9 +17,6 @@ import javax.servlet.http.HttpSession;
 @WebFilter("/loginFilter")
 public class loginFilter implements Filter {
 
-	/**
-	 * Default constructor.
-	 */
 	public loginFilter() {
 		System.out.println("로그인 필터 생성 ");
 	}
@@ -47,7 +44,7 @@ public class loginFilter implements Filter {
 			((HttpServletResponse) response).sendRedirect("./index.html");
 		} else {
 
-			System.out.println(session + " : " + session.getAttribute("userId"));
+			System.out.println(session + " : " + session.getAttribute("id"));
 			
 			// 체인의 다음 필터에 요청 래퍼 객체 전달
 			chain.doFilter(requestWrapper, response);
